@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
-    [SerializeField] private float interactionDistance;
+    public float interactionDistance;
     void Start()
     {
 

@@ -9,6 +9,7 @@ public class BullAnimation : MonoBehaviour
     [SerializeField] private Texture[] bullBack;
     [SerializeField] private Texture[] bullRight;
     [SerializeField] private Texture[] bullLeft;
+    [SerializeField] private Texture[] bullStunned;
     private MeshRenderer meshRenderer;
     private GameObject bull;
     private GameObject player;
@@ -18,7 +19,8 @@ public class BullAnimation : MonoBehaviour
         front,
         back,
         right,
-        left
+        left,
+        stunned
     }
     [SerializeField] private Side side;
     void Start()
@@ -34,7 +36,7 @@ public class BullAnimation : MonoBehaviour
         float maxCord = MathF.Max(Mathf.Abs(relativePos.x), MathF.Abs(relativePos.z));
         if (maxCord == Mathf.Abs(relativePos.x))
         {
-            if (relativePos.x > 0)
+            if (relativePos.x < 0)
             {
                 side = Side.left;
             }
@@ -53,6 +55,10 @@ public class BullAnimation : MonoBehaviour
             {
                 side = Side.front;
             }
+        }
+        if (bull.GetComponent<BullMovement>().isStunned)
+        {
+            side = Side.stunned;
         }
     }
 
@@ -75,13 +81,19 @@ public class BullAnimation : MonoBehaviour
             case Side.back:
                 textures = bullBack;
                 break;
+            case Side.stunned:
+                textures = bullStunned;
+                break;
+            default:
+                textures = bullFront;
+                break;
         }
         index++;
-        if (index >= bullFront.Length)
+        if (index >= textures.Length)
         {
             index = 0;
         }
-        meshRenderer.material.mainTexture = bullFront[index];
+        meshRenderer.material.mainTexture = textures[index];
         StartCoroutine(NextFrame());
     }
 }

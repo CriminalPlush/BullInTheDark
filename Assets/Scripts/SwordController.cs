@@ -18,7 +18,6 @@ public class SwordController : MonoBehaviour
         List<Sword> swordsSelection = new List<Sword>();
         foreach (var x in swords)
         {
-            Debug.Log(x.enabled);
             if (x.enabled == false)
             {
                 swordsSelection.Add(x);

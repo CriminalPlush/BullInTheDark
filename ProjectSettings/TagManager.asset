@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Point
   - Bull
+  - Fire
+  - Wall
   layers:
   - Default
   - TransparentFX

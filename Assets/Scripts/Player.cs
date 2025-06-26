@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Player : MonoBehaviour
     {
         if (HP <= 0)
         {
-            Die();
+            StartCoroutine(Die());
         }
     }
 
@@ -20,10 +21,11 @@ public class Player : MonoBehaviour
         HP--;
     }
 
-    private void Die()
+    private IEnumerator Die()
     {
         deathPanel.SetActive(true);
         Time.timeScale = 0;
-        Destroy(this);
+        yield return new WaitForSecondsRealtime(3f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

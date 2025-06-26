@@ -5,12 +5,12 @@ using UnityEngine;
 public class Door : MonoBehaviour, Action
 {
     private Quaternion baseRotation;
-    [SerializeField] private float y;
+    [SerializeField] private AudioSource openSound;
+    [SerializeField] private AudioSource closeSound;
     private bool isOpened = false;
     void Start()
     {
         baseRotation = transform.rotation;
-        y = transform.rotation.y;
     }
     public void Act()
     {
@@ -22,7 +22,9 @@ public class Door : MonoBehaviour, Action
         {
             isOpened = true;
             transform.rotation = baseRotation * Quaternion.Euler(0,88f,0);
+            openSound.Play();
             yield return new WaitForSeconds(1.5f);
+            closeSound.Play();
             transform.rotation = baseRotation;
             isOpened = false;
         }

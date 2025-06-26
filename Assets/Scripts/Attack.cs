@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour, Action
 {
-    private OxAnger oxAnger;
-    private OxMovement oxMovement;
+    private BullAnger bullAnger;
+    private BullMovement bullMovement;
     private PlayerWeapon playerWeapon;
     private SwordController swordController;
+    [SerializeField] private AudioSource attackSound;
+    [SerializeField] private AudioSource damageSound;
     void Start()
     {
-        oxAnger = FindObjectOfType<OxAnger>();
-        oxMovement = FindObjectOfType<OxMovement>();
+        bullAnger = FindObjectOfType<BullAnger>();
+        bullMovement = FindObjectOfType<BullMovement>();
         playerWeapon = FindObjectOfType<PlayerWeapon>();
         swordController = FindAnyObjectByType<SwordController>();
     }
@@ -19,10 +21,12 @@ public class Attack : MonoBehaviour, Action
     {
         if (playerWeapon.hasWeapon)
         {
-            oxAnger.angerLevel++;
-            oxMovement.Stun();
+            bullAnger.IncreaseAnger();
+            bullMovement.Stun();
             playerWeapon.hasWeapon = false;
             swordController.SwordSpawn();
+            attackSound.Play();
+            damageSound.Play();
         }
     }
 }
