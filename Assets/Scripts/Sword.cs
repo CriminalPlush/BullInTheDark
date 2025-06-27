@@ -11,8 +11,11 @@ public class Sword : MonoBehaviour, Action
     }
     public void Act()
     {
-        playerWeapon.hasWeapon = true;
-        this.enabled = false;
-        //gameObject.SetActive(false);
+        if (this.enabled == true)
+        {
+            playerWeapon.hasWeapon = true;
+            GetComponent<AudioSource>().enabled = false;
+            this.enabled = false;
+        }
     }
 }

@@ -18,6 +18,7 @@ public class SwordController : MonoBehaviour
         List<Sword> swordsSelection = new List<Sword>();
         foreach (var x in swords)
         {
+            x.gameObject.GetComponent<AudioSource>().enabled = false;
             if (x.enabled == false)
             {
                 swordsSelection.Add(x);
@@ -28,6 +29,8 @@ public class SwordController : MonoBehaviour
             }
         }
         Debug.Log(swordsSelection.Count);
-        swordsSelection[Random.Range(0, swordsSelection.Count)].enabled = true;
+        var temp = swordsSelection[Random.Range(0, swordsSelection.Count)];
+        temp.enabled = true;
+        temp.gameObject.GetComponent<AudioSource>().enabled = true;
     }
 }

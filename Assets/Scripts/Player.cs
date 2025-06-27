@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
         deathPanel.SetActive(true);
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(3f);
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
